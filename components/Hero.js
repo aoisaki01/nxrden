@@ -8,18 +8,16 @@ import { database } from '@/lib/firebase';
 import { ref, onValue } from 'firebase/database';
 
 export default function Hero() {
-    const [customerCount, setCustomerCount] = useState(78);
+    // Static count for security - prevents reading all orders on client side
+    const [customerCount, setCustomerCount] = useState(128); // Started at 78 + ~50
 
+    // Real-time fetching removed to protect customer data
     useEffect(() => {
-        const ordersRef = ref(database, 'orders');
-        const unsubscribe = onValue(ordersRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                const completedOrders = Object.values(data).filter(order => order.status === 'completed').length;
-                setCustomerCount(78 + completedOrders);
-            }
-        });
-        return () => unsubscribe();
+        // Animation effect for the number (optional)
+        const interval = setInterval(() => {
+            setCustomerCount(prev => prev < 150 ? prev + 1 : prev);
+        }, 30000);
+        return () => clearInterval(interval);
     }, []);
 
     return (

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import LoginForm from '@/components/LoginForm';
 import AdminDashboard from '@/components/AdminDashboard';
-import { auth } from '@/lib/firebase';
+import { auth } from '@/lib/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 
 export default function AdminPage() {

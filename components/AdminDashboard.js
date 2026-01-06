@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { database, auth } from '@/lib/firebase';
+import { database } from '@/lib/firebase';
+import { auth } from '@/lib/auth';
 import { ref, push, onValue, set, remove, update } from 'firebase/database';
 import { signOut } from 'firebase/auth';
 import { Upload, Plus, LogOut, Package, Database, Trash2, Edit2, X, Settings, DollarSign } from 'lucide-react';
@@ -329,6 +330,7 @@ export default function AdminDashboard() {
                         <table className="w-full text-left text-sm text-gray-400">
                             <thead className="bg-white/5 text-xs uppercase text-gray-300">
                                 <tr>
+                                    <th className="px-4 py-3">Order ID</th>
                                     <th className="px-4 py-3">Time</th>
                                     <th className="px-4 py-3">Roblox User</th>
                                     <th className="px-4 py-3">Item</th>
@@ -340,11 +342,14 @@ export default function AdminDashboard() {
                             <tbody>
                                 {orders.length === 0 ? (
                                     <tr>
-                                        <td colSpan="6" className="px-4 py-6 text-center text-gray-500">No recent orders found.</td>
+                                        <td colSpan="7" className="px-4 py-6 text-center text-gray-500">No recent orders found.</td>
                                     </tr>
                                 ) : (
                                     orders.map((order) => (
                                         <tr key={order.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                            <td className="px-4 py-3 font-mono text-xs text-pink-500/80 whitespace-nowrap select-all" title={order.id}>
+                                                {order.id.substring(0, 8)}...
+                                            </td>
                                             <td className="px-4 py-3 font-mono text-xs text-gray-500 whitespace-nowrap">{formatTime(order.createdAt)}</td>
                                             <td className="px-4 py-3 font-bold text-white">{order.username}</td>
                                             <td className="px-4 py-3 text-white">
