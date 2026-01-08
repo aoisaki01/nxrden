@@ -8,24 +8,26 @@ import { database } from '@/lib/firebase';
 import { ref, onValue } from 'firebase/database';
 
 export default function Hero() {
-    // Static count for security - prevents reading all orders on client side
-    const [customerCount, setCustomerCount] = useState(128); // Started at 78 + ~50
+    const [customerCount, setCustomerCount] = useState(128);
 
-    // Real-time fetching removed to protect customer data
     useEffect(() => {
-        // Animation effect for the number (optional)
-        const interval = setInterval(() => {
-            setCustomerCount(prev => prev < 150 ? prev + 1 : prev);
-        }, 30000);
-        return () => clearInterval(interval);
+        const ordersRef = ref(database, 'orders');
+        const unsubscribe = onValue(ordersRef, (snapshot) => {
+            if (snapshot.exists()) {
+                // Use snapshot.size for efficient counting of children
+                setCustomerCount(snapshot.size + 128); // Base count + real orders
+            }
+        });
+
+        return () => unsubscribe();
     }, []);
 
     return (
         <div className="relative overflow-hidden py-24 sm:py-32">
             <div className="absolute inset-0 z-0 hidden dark:block">
-                <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-                <div className="absolute top-0 -right-4 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-                <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+                <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/30 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob"></div>
+                <div className="absolute top-0 -right-4 w-72 h-72 bg-accent/30 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
+                <div className="absolute -bottom-8 left-20 w-72 h-72 bg-purple-500/30 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-4000"></div>
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
@@ -34,31 +36,31 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-pink-400 text-sm mb-8">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-primary text-sm mb-8 backdrop-blur-sm">
                         <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                         </span>
                         Instant Delivery System Online
                     </div>
 
                     <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight text-white mb-6">
-                        Level Up Your <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-glow">
-                            Digital Experience
+                        Premium <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-accent text-glow">
+                            Digital Top Up
                         </span>
                     </h1>
 
-                    <p className="mt-6 text-lg leading-8 text-gray-300 max-w-2xl mx-auto">
-                        The most trusted marketplace for Robux and digital vouchers.
-                        Experience safe transactions, instant delivery, and dedicated 24/7 support.
+                    <p className="mt-6 text-lg leading-8 text-gray-300 max-w-2xl mx-auto mix-blend-plus-lighter">
+                        Secure, fast, and automated.
+                        The best marketplace for your gaming needs with 24/7 support.
                     </p>
 
                     <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <a href="#custom" className="bg-white text-black hover:bg-gray-200 px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-all hover:scale-105">
+                        <a href="#custom" className="bg-primary hover:bg-white text-black px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-all hover:scale-105 shadow-[0_0_20px_rgba(216,180,254,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]">
                             Shop Now <ArrowRight size={20} />
                         </a>
-                        <Link href="/tatacara-pembelian" className="text-sm font-semibold leading-6 text-white hover:text-pink-400 transition-colors">
+                        <Link href="/tatacara-pembelian" className="text-sm font-semibold leading-6 text-white hover:text-primary transition-colors">
                             How it works <span aria-hidden="true">→</span>
                         </Link>
                     </div>

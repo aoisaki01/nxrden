@@ -46,11 +46,11 @@ export default function RobuxCalculator({ onBuy }) {
     return (
         <section className="mb-16">
             <h2 className="text-2xl font-display font-bold text-white mb-8 flex items-center gap-2">
-                <span className="w-1 h-8 bg-cyan-500 rounded-full inline-block"></span>
+                <span className="w-1 h-8 bg-primary rounded-full inline-block shadow-[0_0_10px_var(--primary)]"></span>
                 Custom Order Calculator
             </h2>
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 max-w-2xl">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 max-w-2xl backdrop-blur-sm">
                 <div className="flex flex-col md:flex-row gap-6">
                     {/* Mode Selection */}
                     <div className="flex-1 space-y-4">
@@ -58,17 +58,17 @@ export default function RobuxCalculator({ onBuy }) {
                         <div className="grid grid-cols-2 gap-4">
                             <button
                                 onClick={() => setMode('5days')}
-                                className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all ${mode === '5days' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-black/40 border-white/10 text-gray-400 hover:bg-white/5'}`}
+                                className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all ${mode === '5days' ? 'bg-primary/20 border-primary text-white shadow-[0_0_15px_rgba(216,180,254,0.15)]' : 'bg-black/40 border-white/10 text-gray-400 hover:bg-white/5'}`}
                             >
-                                <Zap size={24} className={mode === '5days' ? 'text-pink-400' : ''} />
+                                <Zap size={24} className={mode === '5days' ? 'text-primary' : ''} />
                                 <span className="font-bold">5 Days</span>
                                 <span className="text-xs opacity-70">Rate {rates.rate5Days} / RBX</span>
                             </button>
                             <button
                                 onClick={() => setMode('gamepass')}
-                                className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all ${mode === 'gamepass' ? 'bg-violet-500/20 border-violet-500 text-white' : 'bg-black/40 border-white/10 text-gray-400 hover:bg-white/5'}`}
+                                className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all ${mode === 'gamepass' ? 'bg-accent/20 border-accent text-white shadow-[0_0_15px_rgba(168,85,247,0.15)]' : 'bg-black/40 border-white/10 text-gray-400 hover:bg-white/5'}`}
                             >
-                                <Gamepad2 size={24} className={mode === 'gamepass' ? 'text-violet-400' : ''} />
+                                <Gamepad2 size={24} className={mode === 'gamepass' ? 'text-accent' : ''} />
                                 <span className="font-bold">Gamepass</span>
                                 <span className="text-xs opacity-70">Rate {rates.rateGamepass} / RBX</span>
                             </button>
@@ -84,13 +84,13 @@ export default function RobuxCalculator({ onBuy }) {
                                 value={amount}
                                 onChange={(e) => setAmount(e.target.value)}
                                 placeholder="e.g. 500"
-                                className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white text-lg font-mono focus:outline-none focus:border-cyan-500 transition-colors mt-2"
+                                className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white text-lg font-mono focus:outline-none focus:border-primary transition-colors mt-2"
                             />
                         </div>
 
                         <div className="bg-black/30 rounded-lg p-4 flex justify-between items-center border border-white/5">
                             <span className="text-gray-400 text-sm">Total Price</span>
-                            <span className="text-xl font-bold text-cyan-400 font-mono">
+                            <span className="text-xl font-bold text-primary font-mono text-glow">
                                 Rp {price.toLocaleString('id-ID')}
                             </span>
                         </div>
@@ -98,7 +98,7 @@ export default function RobuxCalculator({ onBuy }) {
                         <button
                             onClick={handleBuy}
                             disabled={!amount || price <= 0}
-                            className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full bg-primary hover:bg-white hover:text-black text-black font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(216,180,254,0.2)]"
                         >
                             <Calculator size={18} />
                             Calculate & Buy

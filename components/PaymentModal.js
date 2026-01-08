@@ -68,7 +68,7 @@ export default function PaymentModal({ isOpen, onClose, product }) {
                     className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl shadow-pink-500/10"
                 >
                     {/* Header */}
-                    <div className="p-4 border-b border-white/10 flex justify-between items-center bg-white/5">
+                    <div className="p-4 border-b border-white/5 flex justify-between items-center bg-white/5 backdrop-blur-md">
                         <h3 className="font-display text-lg text-white">
                             {step === 'input' ? 'Customer Details' : step === 'payment' ? 'Complete Payment' : 'Success'}
                         </h3>
@@ -83,7 +83,7 @@ export default function PaymentModal({ isOpen, onClose, product }) {
                             <div className="space-y-6">
                                 <div className="text-center">
                                     <h4 className="text-xl font-bold text-white mb-1">{product.name}</h4>
-                                    <p className="text-pink-500 font-mono text-lg">{product.priceDisplay}</p>
+                                    <p className="text-primary font-mono text-lg text-glow">{product.priceDisplay}</p>
                                 </div>
 
                                 <div>
@@ -94,7 +94,7 @@ export default function PaymentModal({ isOpen, onClose, product }) {
                                         type="text"
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-pink-500 transition-colors"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
                                         placeholder={`Enter ${product.customLabel || 'username'}...`}
                                     />
                                 </div>
@@ -102,7 +102,7 @@ export default function PaymentModal({ isOpen, onClose, product }) {
                                 <button
                                     onClick={handleContinue}
                                     disabled={!username.trim()}
-                                    className="w-full bg-gradient-to-r from-pink-600 to-violet-600 hover:from-pink-500 hover:to-violet-500 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-primary hover:bg-white hover:text-black text-black font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(216,180,254,0.2)]"
                                 >
                                     Continue to Payment
                                 </button>

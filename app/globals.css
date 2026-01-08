@@ -3,25 +3,45 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
   --color-accent: var(--accent);
+  --color-surface: var(--surface);
   --font-sans: var(--font-inter);
   --font-display: var(--font-orbitron);
 }
 
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
-  --accent: #d946ef;
+  /* Deep black-grey background */
+  --background: #0a0a0a;
+  /* Light grey text */
+  --foreground: #e5e5e5;
+  /* Surface color for cards */
+  --surface: #121212;
+  /* Light Purple (Ungu Muda) */
+  --primary: #d8b4fe;
+  /* Darker Purple/Violet for accents */
+  --accent: #a855f7;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 10px rgba(217, 70, 239, 0.5);
+    text-shadow: 0 0 20px rgba(216, 180, 254, 0.4);
+  }
+
+  .glass-panel {
+    background: rgba(18, 18, 18, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
